@@ -30,5 +30,5 @@ spec:
 
           livenessProbe:
               httpGet:
-                path: /health
+                path: /
                 port: 80
