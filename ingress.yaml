@@ -3,11 +3,17 @@ kind: Ingress
 metadata:
   name: app-ingress
   namespace: development
-
 spec:
   ingressClassName: nginx
 
+  tls:
+    - hosts:
+        - api.example.com
+        - app.example.com
+      secretName: my-tls
+
   rules:
+    # Rule 1: Route api.example.com to the 'api' service on port 80
     - host: api.example.com
       http:
         paths:
@@ -17,14 +23,9 @@ spec:
               service:
                 name: api
                 port:
-                  number: 8000
+                  number: 80    # Fixed: Matched to api service port 80
 
-  tls:
-    - hosts:
-        - api.example.com
-        - app.example.com
-      secretName: my-tls
-
+    # Rule 2: Route app.example.com to the 'frontend' service on port 80
     - host: app.example.com
       http:
         paths:

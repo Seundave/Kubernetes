@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: development
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api    # <--- Must match service selector
+  template:
+    metadata:
+      labels:
+        app: api  # <--- MUST match deployment selector and service selector
+    spec:
+      containers:
+      - name: api
+        image: nginx:1.26
+        ports:
+        - containerPort: 80
