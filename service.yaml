@@ -9,5 +9,6 @@ spec:
   selector:
     app: web
   ports:
-    - port: 8000
+    - name: metrics
+      port: 8000
       targetPort: 8000
